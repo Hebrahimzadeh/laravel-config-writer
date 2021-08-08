@@ -21,7 +21,16 @@
         }
     },
     "autoload-dev": {
-        "October\\Rain\\Config\\Tests": "tests/"
+        "psr-4": {
+            "October\\Rain\\Config\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "October\\Rain\\Config\\ServiceProvider"
+            ]
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true
