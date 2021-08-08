@@ -34,7 +34,7 @@ jobs:
     - name: PHP tool Action
       # You may pin to the exact commit or the version.
       # uses: MilesChou/php-tools-action@233e970ac493ba99743ccb80deb8fa9fcccdfcf8
-      uses: MilesChou/php-tools-action@v1.0.0
+      uses: MilesChou/php-tools-action/7.4/phpunit@master
       with:
         # PHPUnit version
         phpunit_version: 9.5.6
