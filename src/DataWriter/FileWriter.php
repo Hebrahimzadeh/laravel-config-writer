@@ -45,10 +45,11 @@ class FileWriter
     /**
      * Write an item value in a file.
      *
-     * @param  string $item
-     * @param  mixed $value
-     * @param  string $filename
+     * @param  string  $item
+     * @param  mixed  $value
+     * @param  string  $filename
      * @return bool
+     * @throws \Exception
      */
     public function write(string $item, $value, string $filename, string $fileExtension = '.php'): bool
     {
@@ -62,7 +63,7 @@ class FileWriter
         return !($this->files->put($path, $contents) === false);
     }
 
-    private function getPath(string $item, string $filename, string $ext = '.php'): string
+    private function getPath(string $item, string $filename, string $ext = '.php'): ?string
     {
         $file = "{$this->defaultPath}/{$filename}{$ext}";
 

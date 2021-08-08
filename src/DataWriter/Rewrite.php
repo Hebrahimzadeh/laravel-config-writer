@@ -106,11 +106,13 @@ class Rewrite
 
     protected function writeValueToPhp($value): string
     {
-        if (is_string($value) && strpos($value, "'") === false) {
-            $replaceValue = "'".$value."'";
-        }
-        elseif (is_string($value) && strpos($value, '"') === false) {
-            $replaceValue = '"'.$value.'"';
+        $replaceValue = '';
+        if (is_string($value)) {
+            if (strpos($value, "'") === false){
+                $replaceValue = "'".$value."'";
+            } else if (strpos($value, '"') === false){
+                $replaceValue = '"'.$value.'"';
+            }
         }
         elseif (is_bool($value)) {
             $replaceValue = ($value ? 'true' : 'false');
@@ -125,12 +127,10 @@ class Rewrite
             $replaceValue = $value;
         }
 
-        $replaceValue = str_replace('$', '\$', $replaceValue);
-
-        return $replaceValue;
+        return str_replace('$', '\$', $replaceValue);
     }
 
-    protected function writeArrayToPhp(array $array): array
+    protected function writeArrayToPhp(array $array): string
     {
         $result = [];
 
@@ -141,8 +141,6 @@ class Rewrite
         }
 
         return '['.implode(', ', $result).']';
-
-        return $result;
     }
 
     protected function buildStringExpression(string $targetKey, array $arrayItems = [], string $quoteChar = "'"): string
@@ -156,7 +154,7 @@ class Rewrite
         $expression[] = '([\'|"]'.$targetKey.'[\'|"]\s*=>\s*)['.$quoteChar.']';
 
         // The target value to be replaced ($2)
-        $expression[] = '([^'.$quoteChar.']*)';
+        $expression[] = '([^'.$quoteChar.'].*)';
 
         // The target key closure
         $expression[] = '['.$quoteChar.']';

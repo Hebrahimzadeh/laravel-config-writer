@@ -14,9 +14,9 @@ class ServiceProvider extends BaseServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register() : void
     {
-        // Bind it only once so we can reuse in IoC
+        // Bind it only once, so we can reuse in IoC
         $this->app->singleton($this->repository(), function($app, $items) {
             $writer = new FileWriter($this->getFiles(), $this->getConfigPath());
             return new Repository($writer, $items);
@@ -29,7 +29,7 @@ class ServiceProvider extends BaseServiceProvider
         });
     }
 
-    public function repository()
+    public function repository(): string
     {
         return Repository::class;
     }
