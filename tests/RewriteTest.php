@@ -1,4 +1,5 @@
 <?php
+namespace October\Rain\Config\Tests;
 
 use October\Rain\Config\DataWriter\Rewrite;
 use Orchestra\Testbench\TestCase;
@@ -10,8 +11,8 @@ class RewriteTest extends TestCase
     {
         $writer = new Rewrite;
 
-        $filePath = __DIR__ . '/fixtures/Config/sample-config.php';
-        $tmpFile = __DIR__ . '/fixtures/Config/temp-config.php';
+        $filePath = __DIR__ . '/fixtures/config/sample-config.php';
+        $tmpFile = __DIR__ . '/fixtures/config/temp-config.php';
         copy($filePath, $tmpFile);
 
         $contents = $writer->toFile($tmpFile, ['connections.sqlite.driver' => 'sqlbite']);
@@ -25,8 +26,9 @@ class RewriteTest extends TestCase
         unlink($tmpFile);
     }
 
+
     /**
-     * @throws Exception
+     * @throws \Exception
      */
     public function testToContent(): void
     {
@@ -35,7 +37,7 @@ class RewriteTest extends TestCase
         /*
          * Rewrite a single level string
          */
-        $contents = file_get_contents(__DIR__ . '/fixtures/Config/sample-config.php');
+        $contents = file_get_contents(__DIR__ . '/fixtures/config/sample-config.php');
         $contents = $writer->toContent($contents, ['url' => 'http://octobercms.com']);
         $result = eval('?>'.$contents);
 

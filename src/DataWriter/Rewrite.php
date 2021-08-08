@@ -60,7 +60,7 @@ class Rewrite
             }
             $actualValue = $array;
 
-            if ($actualValue != $expectedValue) {
+            if ($actualValue !== $expectedValue) {
                 throw new Exception(sprintf('Unable to rewrite key "%s" in config, rewrite failed', $key));
             }
         }
