@@ -12,6 +12,8 @@ The following value types are supported for writing: strings, integers, booleans
 
 This provider is designed to be used in Laravel from `5.4` version.
 
+Also package support on `php:7.4` and `laravel 8`
+
 ## Setup
 
 Install through composer:
@@ -58,3 +60,6 @@ $writeConfig->toFile('path/to/config.php', [
     'booleanItem' => true
 ]);
 ```
+
+## acknowledgements
+This package makes use of the forked yourself.
