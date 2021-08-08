@@ -1,17 +1,17 @@
 <?php
 
-use PHPUnit\Framework\TestCase;
 use October\Rain\Config\DataWriter\Rewrite;
+use Orchestra\Testbench\TestCase;
 
 class RewriteTest extends TestCase
 {
 
-    public function testToFile()
+    public function testToFile(): void
     {
         $writer = new Rewrite;
 
-        $filePath = __DIR__ . '../../fixtures/Config/sample-config.php';
-        $tmpFile = __DIR__ . '../../fixtures/Config/temp-config.php';
+        $filePath = __DIR__ . '/fixtures/Config/sample-config.php';
+        $tmpFile = __DIR__ . '/fixtures/Config/temp-config.php';
         copy($filePath, $tmpFile);
 
         $contents = $writer->toFile($tmpFile, ['connections.sqlite.driver' => 'sqlbite']);
@@ -25,18 +25,21 @@ class RewriteTest extends TestCase
         unlink($tmpFile);
     }
 
-    public function testToContent()
+    /**
+     * @throws Exception
+     */
+    public function testToContent(): void
     {
         $writer = new Rewrite;
 
         /*
          * Rewrite a single level string
          */
-        $contents = file_get_contents(__DIR__ . '../../fixtures/Config/sample-config.php');
+        $contents = file_get_contents(__DIR__ . '/fixtures/Config/sample-config.php');
         $contents = $writer->toContent($contents, ['url' => 'http://octobercms.com']);
         $result = eval('?>'.$contents);
 
-        $this->assertTrue(is_array($result));
+        $this->assertIsArray($result);
         $this->assertArrayHasKey('url', $result);
         $this->assertEquals('http://octobercms.com', $result['url']);
 
