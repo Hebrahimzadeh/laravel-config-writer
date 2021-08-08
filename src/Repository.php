@@ -31,16 +31,19 @@ class Repository extends RepositoryBase
     /**
      * Write a given configuration value to file.
      *
-     * @param string $key
-     * @param mixed $value
+     * @param  string  $key
+     * @param  mixed  $value
      * @return bool
+     * @throws Exception
      */
     public function write(string $key, $value): bool
     {
-        list($filename, $item) = $this->parseKey($key);
+        [$filename, $item] = $this->parseKey($key);
         $result = $this->writer->write($item, $value, $filename);
 
-        if(!$result) throw new Exception('File could not be written to');
+        if(!$result) {
+            throw new Exception('File could not be written to');
+        }
 
         $this->set($key, $value);
 

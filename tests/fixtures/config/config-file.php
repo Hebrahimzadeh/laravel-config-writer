@@ -6,6 +6,7 @@ return [
         'index_1' => 'string index instead int',
         'index_2' => 222,
         'index_3' => 'string index instead array',
-        'index_4' => [1]
+        'index_4' => [1],
+        'index_5' => 111
     ]
 ];

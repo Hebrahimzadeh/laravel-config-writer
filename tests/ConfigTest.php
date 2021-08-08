@@ -43,11 +43,13 @@ class ConfigTest extends TestCase
         Config::Write('config-file.test_array_one.index_2', 222);
         Config::Write('config-file.test_array_one.index_3', 'string index instead array');
         Config::Write('config-file.test_array_one.index_4', [1]);
+        Config::Write('config-file.test_array_one.index_5', 111);
         $value = [
             'index_1' => 'string index instead int',
             'index_2' => 222,
             'index_3' => 'string index instead array',
-            'index_4' => [1]
+            'index_4' => [1],
+            'index_5' => 111
         ];
 
         $configFile = $this->getConfig();

@@ -83,8 +83,10 @@ class FileWriter
 
         $isset = false;
         while ($key = array_shift($keys)) {
-            $isset = isset($vars[$key]);
-            if (is_array($vars[$key])) $vars = $vars[$key];
+            $isset = array_key_exists($key, $vars);
+            if (is_array($vars[$key])) {
+                $vars = $vars[$key];
+            }
         }
 
         return $isset;
